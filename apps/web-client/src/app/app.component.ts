@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { CoreModule } from './core/core.module'; 
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [CoreModule, RouterModule],
   selector: 'ebook-manager-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
