@@ -1,0 +1,22 @@
+<mat-grid-list cols="4" rowHeight="700px">
+    <mat-grid-tile colspan="1">
+        <mat-card class="mat-elevation-z4 book-card">
+            <img mat-card-image src="{{book.coverImage}}" alt="Book Cover">
+            <mat-card-header>
+                <mat-card-subtitle>{{ book.author }}</mat-card-subtitle>
+                <mat-card-title>{{ book.title }}</mat-card-title>
+            </mat-card-header>
+        
+            <mat-card-actions class="card-actions">
+                <ebook-manager-rating></ebook-manager-rating>
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="3">
+        <mat-card class="mat-elevation-z4 viewer-card">
+            <mat-card-content id="book-area"></mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+
+</mat-grid-list>

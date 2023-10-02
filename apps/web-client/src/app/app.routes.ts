@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 import { ContainerComponent } from './container/container.component';
 import { LibraryComponent } from './core/library/library.component';
+import { BookComponent } from './core/book/book.component';
 import { SettingsComponent } from './core/settings/settings.component';
 
 export const appRoutes: Route[] = [
@@ -14,9 +15,25 @@ export const appRoutes: Route[] = [
                 title: 'Library'
             },
             {
+                path: 'book/:id',
+                component: BookComponent,
+                title: 'Book'
+            },
+            {
                 path: 'settings',
                 component: SettingsComponent,
                 title: 'Settings'
+            },
+
+
+            { 
+                path: '', 
+                redirectTo: 'library', 
+                pathMatch: 'full',
+            },
+            { 
+                path: '**',
+                component: LibraryComponent,
             },
         ]
     }

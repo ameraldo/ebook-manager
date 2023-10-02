@@ -5,12 +5,22 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 
+import { RatingComponent } from '../shared/rating/rating.component';
+
 import { LibraryComponent } from './library/library.component';
+import { BookComponent } from './book/book.component';
 import { SettingsComponent } from './settings/settings.component';
 
+
 @NgModule({
-  imports: [CommonModule, LayoutModule, MatGridListModule, MatCardModule],
-  declarations: [LibraryComponent, SettingsComponent],
+  imports: [
+    CommonModule,
+    RatingComponent,
+    LayoutModule,
+    MatGridListModule,
+    MatCardModule,
+  ],
+  declarations: [LibraryComponent, BookComponent, SettingsComponent],
   exports: [LibraryComponent],
 })
 export class CoreModule {}
