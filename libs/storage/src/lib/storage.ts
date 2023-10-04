@@ -23,10 +23,11 @@ export class Storage {
     return data;
   }
 
-  public save(data: any): void {
+  public save(data: any): any {
     const id = this.generateId();
     data.id = id;
     this.data[id] = data;
+    return this.data[id];
   }
 
   public delete(id: string): void {

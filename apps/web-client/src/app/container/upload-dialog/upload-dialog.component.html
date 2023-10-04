@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Upload an Ebook</h1>
+<div mat-dialog-content class="content">
+  <button mat-raised-button color="primary" [class.spinner]="loading" (click)="openInputDialog()">
+      <mat-icon *ngIf="!loading">upload_file</mat-icon>
+      <span *ngIf="!loading">Upload</span>
+  </button>
+  <input
+    #input
+    id="file"
+    type="file"
+    hidden
+    accept="application/epub+zip"
+    (change)="selectFile()"
+  />
+</div>
+
+<!--
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
+-->
