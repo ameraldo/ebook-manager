@@ -1,8 +1,7 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Book } from 'epubjs';
-import { storage } from '../../app.globals';
-
+import { BooksService } from '../../services/books.service';
 
 @Component({
   selector: 'ebook-manager-upload-dialog',
@@ -10,14 +9,16 @@ import { storage } from '../../app.globals';
   styleUrls: ['./upload-dialog.component.scss'],
 })
 export class UploadDialogComponent implements AfterViewInit {
-  @ViewChild('input') inputRef!: ElementRef;
+  @ViewChild('input') private inputRef!: ElementRef;
 
   public loading = false;
   public closed = false;
   private input: ElementRef['nativeElement'];
 
-  constructor(private dialogRef: MatDialogRef<UploadDialogComponent>) {}
-
+  constructor(
+    private dialogRef: MatDialogRef<UploadDialogComponent>,
+    private booksService: BooksService
+  ) {}
 
   ngAfterViewInit() {
     this.input = this.inputRef.nativeElement;
@@ -53,8 +54,12 @@ export class UploadDialogComponent implements AfterViewInit {
           .then((res) => { if (res.ok) return res.blob(); throw new Error('Invalid book cover.'); })
           .then((blob) => this.convertToBase64(blob));
       }
+      // Get metadata.
+      const metadata = await book.loaded.metadata;
+      // Avoid adding duplicate books.
+      const found = this.booksService.getBooks({ 'metadata.identifier': metadata.identifier }).length;
       // Save book in storage.
-      storage.save({ src: bookSrc, cover: coverSrc });
+      if (!found) this.booksService.saveBook({ src: bookSrc, cover: coverSrc, metadata });
       this.dialogRef.close();
     } catch (error) { console.log(error); }
     this.loading = false;

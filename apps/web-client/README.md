@@ -21,6 +21,12 @@ Generating a component
 npx nx g @nx/angular:component modulename/componentname --project=web-client
 ```
 
+Generating a service
+
+```
+npx nx g @nx/angular:service services/servicename -project=web-client
+```
+
 Adding an angular library
 
 ```
